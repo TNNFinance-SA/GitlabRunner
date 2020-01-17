@@ -16,6 +16,7 @@ RUN curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID"
 RUN apt-get update && apt-get install -y nodejs docker-ce
 COPY php.ini /usr/local/etc/php/php.ini
 
+RUN apt-get install -y python-setuptools
 RUN pip install --upgrade pip
 RUN pip install fabric s3cmd awscli boto boto3 PyHamcrest requests pip
 
