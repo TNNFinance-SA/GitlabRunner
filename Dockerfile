@@ -2,13 +2,11 @@ FROM tnnfinance/php:7.2-dev
 
 COPY php.ini /usr/local/etc/php/php.ini
 
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash
-
-RUN apt-get update && apt-get install -y curl git python python-pip jq libssl-dev curl ruby rubygems curl puppet apt-transport-https ruby-dev sudo  unzip wget  rsync software-properties-common libjpeg62-turbo-dev ssh
+RUN apt-get update && apt-get install -y curl git python python-pip jq libssl-dev curl ruby rubygems curl puppet apt-transport-https ruby-dev sudo  unzip wget  rsync software-properties-common libjpeg62-turbo-dev ssh apt-transport-https ca-certificates curl gnupg-agent software-properties-common
 
 RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs) stable"
 RUN curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | sudo apt-key add -
-RUN apt-get update && apt-get install -y nodejs docker-ce
+RUN apt-get update && apt-get install -y nodejs npm docker-ce
 
 RUN apt-get install -y python-setuptools
 RUN pip install --upgrade pip
