@@ -5,16 +5,22 @@ RUN docker-php-ext-install pdo pdo_pgsql pgsql zip bcmath mbstring
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 RUN pecl install memcached && docker-php-ext-enable memcached
 
-RUN apt-get update && apt-get install -y zlib1g-dev libicu-dev g++
+RUN apt-get update && apt-get install -y zlib1g-dev libicu-dev g++ libjpeg-dev libpng-dev
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-install intl
+
+RUN docker-php-ext-configure gd --with-jpeg-dir=/usr/lib/x86_64-linux-gnu/
+RUN docker-php-ext-install gd && docker-php-ext-enable gd
+
+COPY php.ini /usr/local/etc/php/php.ini
 
 RUN wget https://getcomposer.org/composer.phar && mv composer.phar /usr/bin/composer && chmod +x /usr/bin/composer
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash
 RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs) stable"
 RUN curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | sudo apt-key add -
 RUN apt-get update && apt-get install -y nodejs docker-ce
-COPY php.ini /usr/local/etc/php/php.ini
+
+
 
 RUN apt-get install -y python-setuptools
 RUN pip install --upgrade pip
