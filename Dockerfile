@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y nodejs npm docker-ce
 
 RUN apt-get install -y python-setuptools
 RUN pip install --upgrade pip
-RUN pip install fabric s3cmd awscli boto boto3 PyHamcrest requests pip
+RUN pip install fabric s3cmd awscli boto boto3 PyHamcrest requests pip docker-compose
 
 RUN apt-get install -y libxml2-dev
 RUN docker-php-ext-install soap
