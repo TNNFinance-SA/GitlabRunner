@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y curl git python python-pip jq libssl-de
 RUN curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh;  bash  nodesource_setup.sh
 RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs) stable"
 RUN curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | sudo apt-key add -
-RUN apt-get update && apt-get install -y nodejs npm docker-ce
+RUN apt-get update && apt-get install -y nodejs npm docker-ce docker-compose
 
 RUN apt-get install -y python-setuptools
 RUN pip install --upgrade pip
